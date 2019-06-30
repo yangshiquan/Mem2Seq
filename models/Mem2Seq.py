@@ -10,10 +10,10 @@ import random
 import numpy as np
 import datetime
 from utils.measures import wer, moses_multi_bleu
-import matplotlib
+# import matplotlib
 # matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import seaborn  as sns
+# import matplotlib.pyplot as plt
+# import seaborn  as sns
 import nltk
 import os
 from sklearn.metrics import f1_score
