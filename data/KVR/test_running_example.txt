@@ -1,0 +1,19 @@
+#navigate#
+0 5_miles moderate_traffic gas_station poi chevron
+0 chevron distance 5_miles
+0 chevron traffic_info moderate_traffic
+0 chevron poi_type gas_station
+0 chevron address 783_arcadia_pl
+0 5_miles no_traffic shopping_center poi town_and_country
+0 town_and_country distance 5_miles
+0 town_and_country traffic_info no_traffic
+0 town_and_country poi_type shopping_center
+0 town_and_country address 383_university_ave
+0 1_miles heavy_traffic grocery_store poi sigona_farmers_market
+0 sigona_farmers_market distance 1_miles
+0 sigona_farmers_market traffic_info heavy_traffic
+0 sigona_farmers_market poi_type grocery_store
+0 sigona_farmers_market address 638_amherst_st
+1 what gas_stations are here	there is a chevron	['chevron']
+2 that s good please pick the quickest route to get there and avoid all heavy_traffic	taking you to chevron	['chevron']
+3 what is the address	783_arcadia_pl is the address for chevron gas_station	['783_arcadia_pl', 'chevron', 'gas_station']
