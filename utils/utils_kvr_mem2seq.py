@@ -248,13 +248,13 @@ def read_langs(file_name, max_line = None):
                 dialog_counter += 1
 
     max_len = max([len(d[0]) for d in data])
-    logging.info("Pointer percentace= {} ".format(cnt_ptr/(cnt_ptr+cnt_voc)))
-    logging.info("Max responce Len: {}".format(max_r_len))
-    logging.info("Max Input Len: {}".format(max_len))
-    logging.info("Avg. User Utterances: {}".format(user_counter*1.0/dialog_counter))
-    logging.info("Avg. Bot Utterances: {}".format(system_counter*1.0/dialog_counter))
-    logging.info("Avg. KB results: {}".format(KB_counter*1.0/dialog_counter))
-    logging.info("Avg. responce Len: {}".format(system_res_counter*1.0/system_counter))
+    # logging.info("Pointer percentace= {} ".format(cnt_ptr/(cnt_ptr+cnt_voc)))
+    # logging.info("Max responce Len: {}".format(max_r_len))
+    # logging.info("Max Input Len: {}".format(max_len))
+    # logging.info("Avg. User Utterances: {}".format(user_counter*1.0/dialog_counter))
+    # logging.info("Avg. Bot Utterances: {}".format(system_counter*1.0/dialog_counter))
+    # logging.info("Avg. KB results: {}".format(KB_counter*1.0/dialog_counter))
+    # logging.info("Avg. responce Len: {}".format(system_res_counter*1.0/system_counter))
     
     print('Sample: ',data[1][0],data[1][1],data[1][2],data[1][3],data[1][4])
     return data, max_len, max_r_len
@@ -309,10 +309,12 @@ def prepare_data_seq(task,batch_size=100,shuffle=True):
     file_train = 'data/KVR/{}train.txt'.format(task)
     file_dev = 'data/KVR/{}dev.txt'.format(task)
     file_test = 'data/KVR/{}test.txt'.format(task)
+    file_test_tmp = 'data/KVR/test_running_example.txt'
 
     pair_train,max_len_train, max_r_train = read_langs(file_train, max_line=None)
     pair_dev,max_len_dev, max_r_dev = read_langs(file_dev, max_line=None)
-    pair_test,max_len_test, max_r_test = read_langs(file_test, max_line=None)
+    # pair_test,max_len_test, max_r_test = read_langs(file_test, max_line=None)
+    pair_test,max_len_test, max_r_test = read_langs(file_test_tmp, max_line=None)
     max_r_test_OOV = 0
     max_len_test_OOV = 0
     

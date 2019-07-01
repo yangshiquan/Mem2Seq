@@ -207,6 +207,7 @@ class Mem2Seq(nn.Module):
             temp = []
             from_which = []
             for i in range(batch_size):
+                # print(self.lang.index2word[topvi[i].item()])
                 if(toppi[i].item() < len(p[i])-1 ):
                     temp.append(p[i][toppi[i].item()])
                     from_which.append('p')
@@ -352,9 +353,9 @@ class Mem2Seq(nn.Module):
 
         if args['dataset']=='kvr':
             logging.info("F1 SCORE:\t{}".format(microF1_TRUE/float(microF1_PRED)))
-            logging.info("\tCAL F1:\t{}".format(microF1_TRUE_cal/float(microF1_PRED_cal))) 
-            logging.info("\tWET F1:\t{}".format(microF1_TRUE_wet/float(microF1_PRED_wet))) 
-            logging.info("\tNAV F1:\t{}".format(microF1_TRUE_nav/float(microF1_PRED_nav))) 
+            # logging.info("\tCAL F1:\t{}".format(microF1_TRUE_cal/float(microF1_PRED_cal)))
+            # logging.info("\tWET F1:\t{}".format(microF1_TRUE_wet/float(microF1_PRED_wet)))
+            # logging.info("\tNAV F1:\t{}".format(microF1_TRUE_nav/float(microF1_PRED_nav)))
         elif args['dataset']=='babi' and int(args["task"])==6:
             logging.info("F1 SCORE:\t{}".format(microF1_TRUE/float(microF1_PRED)))
               
@@ -435,7 +436,8 @@ class EncoderMemNN(nn.Module):
             m_A = torch.sum(embed_A, 2).squeeze(2) # b * m * e
 
             u_temp = u[-1].unsqueeze(1).expand_as(m_A)
-            prob   = self.softmax(torch.sum(m_A*u_temp, 2))  
+            prob   = self.softmax(torch.sum(m_A*u_temp, 2))
+            prob_numpy = prob.detach().cpu().numpy()
             embed_C = self.C[hop+1](story.contiguous().view(story.size(0), -1).long())
             embed_C = embed_C.view(story_size+(embed_C.size(-1),)) 
             m_C = torch.sum(embed_C, 2).squeeze(2)
@@ -499,6 +501,7 @@ class DecoderMemNN(nn.Module):
             u_temp = u[-1].unsqueeze(1).expand_as(m_A)
             prob_lg = torch.sum(m_A*u_temp, 2)
             prob_   = self.softmax(prob_lg)
+            prob_numpy = prob_.detach().cpu().numpy()
             m_C = self.m_story[hop+1]
             temp.append(prob_)
             prob = prob_.unsqueeze(2).expand_as(m_C)
